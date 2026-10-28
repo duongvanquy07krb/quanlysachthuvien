@@ -1,4 +1,4 @@
-// khởi tạo class Sach
+//Khoi tao
 class Sach {
     private String maSach;
     private String tenSach;
@@ -7,7 +7,7 @@ class Sach {
     private double donGia;
     private int soLuong;
 
-    
+
     public Sach() {
     }
 
