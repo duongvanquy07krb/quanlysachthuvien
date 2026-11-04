@@ -1,5 +1,6 @@
 package com.mycompany.quanlysach;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 class Sach {
     private String maSach;
@@ -68,84 +69,112 @@ class Sach {
 }
 
 public class Quanlysach {
-    public static void main(String[] args) {
+   public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int luaChon = 0;
         
-      
-        Sach sachHienTai = new Sach(); 
-        int tongSoLuongTatCa = 0;
-        double tongGiaTriTatCa = 0;
-        boolean daCoDuLieu = false; 
+        int[] soLuong = new int[5];
+        ArrayList<String> dsMaSach = new ArrayList<>();
+        ArrayList<Sach> danhSachSach = new ArrayList<>();
+        
+        int luaChon = 0;
 
-        // Bài 3: Menu lặp đến khi chọn Thoát
         do {
-            System.out.println("\n===== MENU QUaN LY THU VIEN =====");
-            System.out.println("1. Nhap n sach bang vong lap");
-            System.out.println("2. Xem tong so luong va tong gia tri sach");
-            System.out.println("3. Tim sach theo ma");
-            System.out.println("4. Thoat");
-            System.out.print("Chon chuc nang (1-4): ");
+            System.out.println("\n===== MENU =====");
+            System.out.println("1. Them sach");
+            System.out.println("2. Hien thi sach");
+            System.out.println("3. Tim sach");
+            System.out.println("4. Xoa sach");
+            System.out.println("5. Sua sach");
+            System.out.println("6. Tinh tong so luong");
+            System.out.println("7. Tinh tong gia tri");
+            System.out.println("8. Thoat");
+            System.out.print("Chon chuc nang: ");
             
             luaChon = sc.nextInt();
             sc.nextLine(); 
 
             switch (luaChon) {
                 case 1:
-                    System.out.print("Nhap so luong sach can them (n): ");
-                    int n = sc.nextInt();
-                    sc.nextLine();
-                    
-                    // Bài 1: Nhập n sách bằng vòng lặp
-                    for (int i = 1; i <= n; i++) {
-                        System.out.println("\n--- Nhap sach thu " + i + " ---");
-                        boolean hopLe = sachHienTai.Nhap(); 
-                        
-                        if (!hopLe) {
-                            System.out.println("Du lieu sai, vui long nhap lai cuon nay!");
-                            i--; 
-                            continue;
-                        }
-                        
-                        // Bài 2: Tính tổng số lượng và tổng giá trị sách ngay trong vòng lặp
-                        tongSoLuongTatCa += sachHienTai.getSoLuong();
-                        tongGiaTriTatCa += sachHienTai.tongTien();
-                        daCoDuLieu = true; 
+                    Sach sachMoi = new Sach();
+                    if(sachMoi.Nhap()){
+                        danhSachSach.add(sachMoi);
+                        dsMaSach.add(sachMoi.getMaSach());
+                        System.out.println("Them thanh cong!");
                     }
-                    System.out.println("\n-> Da nhap xong " + n + " cuon sach!");
                     break;
-                    
                 case 2:
-                    System.out.println("\n--- KET QUA TONG HOP ---");
-                    System.out.println("Tong so luong sach: " + tongSoLuongTatCa);
-                    System.out.println("Tong gia tri tat ca sach: " + tongGiaTriTatCa);
-                    break;
-                    
-                case 3:
-                    if (!daCoDuLieu) {
-                        System.out.println("Chua co du lieu sach nao trong he thong!");
-                        break;
+                    for(Sach s : danhSachSach){
+                        s.Xuat();
                     }
-                    
+                    break;
+                case 3:
                     System.out.print("Nhap ma sach can tim: ");
                     String maTim = sc.nextLine();
-                    
-                    // Bài 4: Tìm sách theo mã (Chỉ kiểm tra được cuốn cuối cùng)
-                    if (maTim.equals(sachHienTai.getMaSach())) {
-                        System.out.println("Da tim thay (Day la cuon sach ban nhap cuoi cung):");
-                        sachHienTai.Xuat();
-                    } else {
-                        System.out.println("Khong tim thay ma sach nay! (Hoac do ban khong dung mang nen du lieu cac cuon sach truoc da bi xoa).");
+                    boolean timThay = false;
+                    for(Sach s : danhSachSach){
+                        if(s.getMaSach().equals(maTim)){
+                            s.Xuat();
+                            timThay = true;
+                            break;
+                        }
                     }
+                    if(!timThay) System.out.println("Khong tim thay!");
                     break;
-                    
                 case 4:
-                    System.out.println("Chuong trinh ket thuc. Tam biet!");
+                    System.out.print("Nhap ma sach can xoa: ");
+                    String maXoa = sc.nextLine();
+                    boolean xoaThanhCong = false;
+                    for(int i=0; i<danhSachSach.size(); i++){
+                         if(danhSachSach.get(i).getMaSach().equals(maXoa)){
+                             danhSachSach.remove(i);
+                             dsMaSach.remove(maXoa);
+                             xoaThanhCong = true;
+                             System.out.println("Da xoa!");
+                             break;
+                         }
+                    }
+                    if(!xoaThanhCong) System.out.println("Khong tim thay!");
                     break;
-                    
+                case 5:
+                    System.out.print("Nhap ma sach can sua: ");
+                    String maSua = sc.nextLine();
+                    boolean suaThanhCong = false;
+                    for(int i=0; i<danhSachSach.size(); i++){
+                         if(danhSachSach.get(i).getMaSach().equals(maSua)){
+                             System.out.println("Nhap thong tin moi:");
+                             Sach sSua = new Sach();
+                             if(sSua.Nhap()){
+                                 danhSachSach.set(i, sSua);
+                                 dsMaSach.set(i, sSua.getMaSach());
+                                 System.out.println("Da sua!");
+                             }
+                             suaThanhCong = true;
+                             break;
+                         }
+                    }
+                    if(!suaThanhCong) System.out.println("Khong tim thay!");
+                    break;
+                case 6:
+                    int tongSL = 0;
+                    for(Sach s : danhSachSach){
+                        tongSL += s.getSoLuong();
+                    }
+                    System.out.println("Tong so luong: " + tongSL);
+                    break;
+                case 7:
+                    double tongGiaTri = 0;
+                    for(Sach s : danhSachSach){
+                        tongGiaTri += s.tongTien();
+                    }
+                    System.out.println("Tong gia tri: " + tongGiaTri);
+                    break;
+                case 8:
+                    System.out.println("Tam biet!");
+                    break;
                 default:
-                    System.out.println("Chon sai, vui long chon tu 1 den 4!");
+                    System.out.println("Chon sai!");
             }
-        } while (luaChon != 4);
+        } while (luaChon != 8);
+        sc.close();
     }
 }
