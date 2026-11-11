@@ -15,16 +15,16 @@ class Sach {
 
     public boolean Nhap() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhap ma sach: ");
+        System.out.println("Nhap ma sach: ");
         maSach = sc.nextLine();
         
-        System.out.print("Nhap ten sach: ");
+        System.out.println("Nhap ten sach: ");
         tenSach = sc.nextLine();
         
-        System.out.print("Nhap tac gia: ");
+        System.out.println("Nhap tac gia: ");
         tacGia = sc.nextLine();
         
-        System.out.print("Nhap nam xuat ban: ");
+        System.out.println("Nhap nam xuat ban: ");
         namXB = sc.nextInt();
         if(namXB > 2026 || namXB <= 0){
             System.out.println("Nam XB phai lon hon 0 va nho hon 2026 ");
