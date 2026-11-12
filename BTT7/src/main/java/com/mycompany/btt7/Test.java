@@ -11,34 +11,37 @@ import java.util.ArrayList;
 public class Test {
     public static void main(String[] args) {
         Sach Toan = new Sach();
-        Toan.maSach= "T001";
-        Toan.tieuDe= "Giai Tich";
-        Toan.tacGia= " Nguyen Minh Anh";
-        Toan.namXuatBan=  2007;
-        Toan.soLuong= 12;
-        Toan.hienThiThongTin();
+        Toan.setMaSach( "T001");
+        Toan.setTieuDe( "Giai Tich");
+        Toan.setTacGia (" Nguyen Minh Anh");
+        Toan.setNamXuatBan(  2007);
+        Toan.setSoLuong(  12);
+
         
         Sach Ly = new Sach();
-        Ly.maSach= "L002";
-        Ly.tieuDe= "Song dien tu";
-        Ly.tacGia= " Nguyen Quan Sinh";
-        Ly.namXuatBan=  2005;
-        Ly.soLuong= 7;
-        Ly.hienThiThongTin();
+        Ly.setMaSach("L002");
+        Ly.setTieuDe( "Song dien tu");
+        Ly.setTacGia( " Nguyen Quan Sinh");
+        Ly.setNamXuatBan( 2005);
+        Ly.setSoLuong(3);
+
         
         Sach Hoa = new Sach();
-        Hoa.maSach= "H001";
-        Hoa.tieuDe= "Hoa dai cuong";
-        Hoa.tacGia= " Le Dai Duong";
-        Hoa.namXuatBan=  2012;
-        Hoa.soLuong= 20;
-        Hoa.hienThiThongTin();
+        Hoa.setMaSach ("H001");
+        Hoa.setTieuDe ("Hoa dai cuong");
+        Hoa.setTacGia(" Le Dai Duong");
+        Hoa.setNamXuatBan(2009);
+        Hoa.setSoLuong(20);
+       
         
-         ArrayList <Sach> danhSachSach = new ArrayList <>();
+        Sach Sinh = new Sach("S001", "Tham Thuc Vat", "Tran Anh Khoa", 2010, 7);
+        
+        ArrayList <Sach> danhSachSach = new ArrayList <>();
         danhSachSach.add(Toan);
         danhSachSach.add(Ly);
         danhSachSach.add(Hoa);
-        System.out.println("--- DANH SÁCH SÁCH TRONG THƯ VIỆN ---");
+        danhSachSach.add(Sinh);
+        System.out.println("--- DANH SACH SACH TRONG THU VIEN ---");
         for (Sach s : danhSachSach) {
             s.hienThiThongTin();
             System.out.println("----------------------");
